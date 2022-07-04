@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Counter :-</h1>
+    <h2 id="count"></h2>
+    <input type="text" id="text" placeholder="start typing...">
+    
+</body>
+</html>
+<script>
+    let name= "ROHIT YadaV";
+
+    function counter(){ 
+        let count = 0;
+        let text =document.getElementById("text");
+
+        let id= setInterval(function(){
+
+            if(text.value === name){
+                alert("You Won");
+                clearInterval(id);
+            }
+
+            if(count === 9){
+                text.disabled = true;
+                alert("You Loose")
+                clearInterval(id);
+            }
+
+
+        let h2 =  document.getElementById("count");
+        h2.innerText=count;
+        count++;
+        }, 1000);
+       
+    }
+
+counter();    
+    
+
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="images" src="https://i.gifer.com/7Pzx.gif" alt="">
+</body>
+</html>
+<script>
+
+    function bankserver(){
+
+        return true;
+    }
+
+    let paymentpromise = new Promise(function(resolve, reject){
+
+        let pin = bankserver();
+
+        setTimeout(function(){
+            if(pin){
+            resolve("Payment Successfull")
+        }else{
+            reject("Try Later");
+        }
+        },3000)
+
+        
+    });
+
+    let image = document.getElementById("images");
+
+    // paymentpromise.then(function (res){
+    //     image.src= "https://agazella.com/wp-content/uploads/2021/03/payment_successful.gif"
+    // })
+
+    // paymentpromise.catch(function (rej){
+    //     image.src= "https://quicksavaari.com/failed.gif"
+    // })
+
+    async function content(){
+        try{
+            let res = await paymentpromise;
+            console.log(res);
+            image.src= "https://agazella.com/wp-content/uploads/2021/03/payment_successful.gif"
+        }
+        catch(err){
+            console.log(err)
+            image.src= "https://quicksavaari.com/failed.gif"
+        }
+    }
+    content();
+
+console.log(paymentpromise)
+</script>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .mapouter {
+        position: relative;
+        text-align: right;
+        height: 500px;
+        width: 600px;
+      }
+    </style>
+    <style>
+      .gmap_canvas {
+        overflow: hidden;
+        background: none !important;
+        height: 500px;
+        width: 600px;
+      }
+    </style>
+  </head>
+  <body onload="getLocation()">
+    <input type="text" id="query" placeholder="City Name" />
+    <button onclick="getdata()">Check Weather</button>
+    <div id="container"></div>
+    <div class="mapouter">
+      <div class="gmap_canvas">
+        <iframe
+          width="600"
+          height="500"
+          id="gmap_canvas"
+          frameborder="0"
+          scrolling="no"
+          marginheight="0"
+          marginwidth="0"
+        ></iframe>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function getdata() {
+    //src="https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed"
+
+    let city = document.getElementById("query").value;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=81ca4956a5663fbc7494048a82c17803`;
+
+    fetch(url)
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (res) {
+        console.log(res);
+        append(res);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
+
+  function append(data) {
+    let url = `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+
+    let container = document.getElementById("container");
+    container.innerHTML = null;
+
+    let div = document.createElement("div");
+
+    let name = document.createElement("h2");
+    name.innerText = data.name;
+
+    let temp = document.createElement("p");
+    let x = data.main.temp - 273;
+    temp.innerText = `Temp:- ${x}C`;
+
+    let weather = document.createElement("p");
+    weather.innerText = `Weather:- ${data.weather.main} `;
+
+    div.append(name, temp, weather);
+
+    container.append(div);
+
+    let iframe = document.getElementById("gmap_canvas");
+    iframe.src = url;
+  }
+
+  function getLocation() {
+    navigator.geolocation.getCurrentPosition(success);
+
+    function success(pos) {
+      const crd = pos.coords;
+
+      console.log("Your current position is:");
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+
+      getdataonlocation(crd.latitude, crd.longitude)
+    }
+  }
+
+  getLocation();
+
+ 
+
+
+  function getdataonlocation(lat, lon) {
+    //src="https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed"
+
+   
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=81ca4956a5663fbc7494048a82c17803`
+
+    fetch(url)
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (res) {
+        console.log(res);
+        append(res);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
+
+</script>

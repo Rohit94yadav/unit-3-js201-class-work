@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>SLIDE SHOW</h1>
+    <input type="text" id="image" placeholder="URL">
+    <button onclick="addimage()">SUBMIT</button>
+    <button onclick="slideshow()">Start Slide Show</button>
+    <button onclick="pause()">Pause</button>
+    <div id="slide_show">
+
+    </div>
+</body>
+</html>
+<script>
+
+function addimage(){
+
+    let image = document.getElementById("image");
+
+    let saveimage = JSON.parse(localStorage.getItem("saveimage")) || [];
+    saveimage.push(image.value);
+
+
+    localStorage.setItem("saveimage",JSON.stringify(saveimage));
+
+
+   image.value = null;
+}
+let id;
+let i=0;
+
+function slideshow(){
+
+    
+    let saveimage = JSON.parse(localStorage.getItem("saveimage")) || [];
+    let container = document.getElementById('slide_show');
+   
+
+   id = setInterval(function(){
+
+        if(i=== saveimage.length){
+        i=0;
+    }
+
+
+        let img = document.createElement("img");
+        img.src= saveimage[i];
+        container.innerHTML=null;
+        container.append(img);
+        i++;
+    },1000)
+}
+
+function pause(){
+
+    clearInterval(id)
+}
+
+</script>

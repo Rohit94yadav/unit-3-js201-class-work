@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main"></div>
+</body>
+</html>
+<script>
+    
+    const url = "https://fakestoreapi.com/products";
+
+    async function getdata(){
+
+        try{
+            let res = await fetch(url);
+            let data= await res.json();
+            append(data)
+            console.log(data)
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+    }
+
+    getdata();
+
+    function append(data){
+        data.forEach(function(el){
+            let main = document.getElementById("main")
+
+            let img = document.createElement("img");
+            img.src = el.image;
+
+            let h2 = document.createElement("h2");
+            h2.innerText= el.title;
+
+            let price = document.createElement("h3");
+            price.innerText= el.price;
+
+            let div= document.createElement("div");
+
+            div.append(img,h2,price);
+            main.append(div);
+        
+        })
+    }
+
+
+</script>
