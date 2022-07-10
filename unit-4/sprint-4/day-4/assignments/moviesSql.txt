@@ -1,0 +1,19 @@
+show databases;
+create database movies;
+use movies;
+create table movies (_id int auto_increment primary key, movieName VARCHAR(100) not null, movieGenre VARCHAR(100) not null, productionYear int not null, budget int not null);
+
+select * from movies where movieName = "September";
+select * from movies where movieName != "September";
+select * from movies where budget > 16993;
+select * from movies where budget >= 16994;
+select * from movies where budget <  10000;
+select * from movies where budget <= 9261;
+select * from movies where productionYear > 2000 and budget > 10000;
+select * from movies where productionYear > 200 or budget > 10000;
+select * from movies where productionYear < 2000 and budget < 10000;
+select * from movies where productionYear < 2000 or budget < 10000;
+select * from movies where productionYear between 2000 and 2010;
+select * from movies order by productionYear desc, movieName asc;
+select * from movies limit 10, 5;
+select _id, movieName, productionYear, budget from movies; 

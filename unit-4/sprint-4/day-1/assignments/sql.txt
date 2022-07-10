@@ -1,0 +1,30 @@
+show databases;
+
+create database posts;
+
+use posts;
+
+create table authors (id int auto_increment primary key, firstName varchar(50) not null, lastName varchar(50) not null);
+
+create table posts (id int auto_increment primary key, title varchar(50) not null, content text not null, createdAt TIME not null, author_id int not null, foreign key (author_id) references authors(id) on delete cascade);
+
+create table comments (id int auto_increment primary key, comments text not null, post_id int not null, foreign key (post_id) references posts(id) on delete cascade);
+
+create table tags (id int auto_increment primary key, tagName varChar(50) not null);
+
+create table post_tag (id int auto_increment primary key, post_id int not null, foreign key (post_id) references posts(id) on delete cascade, tag_id int not null, foreign key (tag_id) references tags(id) on delete cascade);
+
+insert into authors (firstName, lastName) values ('Kartik', 'Yadav'), ('Dhaval', 'Cheda'), ('Nrupul', 'Dev'), ('Anant', 'Jain'), ('Monis', 'Khan');
+
+insert into posts (title, content, createdAt, author_id) values ('My experience', 'It was very good', '21:25', 1), ('React', 'a js framework', '08:56:22', 2), ('Node JS', 'a js platform', '05:02:22', 1), ('Express', 'a framework on top of Node JS', '11:12:45', 2), ('html', 'for creating web pages', '12:33:12', 3);
+
+insert into comments (comments, post_id) values ('Nice Article', 1), ('Well Explained', 2), ('Informative', 3), ('learned a lot', 4), ('well explained', 5);
+
+insert into tags (tagName) values ('Project'), ('React'), ('Node.js'), ('express'), ('html');
+
+insert into post_tag (post_id, tag_id) values (1, 1), (1, 2), (1, 3), (1, 5), (1, 5), (2, 2), (3, 3), (4, 4), (5, 5);
+
+delete from authors where id = 2;
+delete from tags where id = 1;
+select firstName from authors where id = 3;
+update authors set firstName = 'Kartik' where id = 3;

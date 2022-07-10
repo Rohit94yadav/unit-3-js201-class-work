@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+    #main {
+        margin: auto;
+        width: 320px;
+        height: 600px;
+    }
+    #form {
+        margin: auto;
+        width: 300px;
+        height: 470px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        padding-left: 20px;
+    }
+    #imgDiv {
+        width: 100px;
+        height: 28px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    img {
+        width: 100px;
+        height: 28px;
+    }
+    #form > p:nth-child(1) {
+        margin-top: 15px;
+        font-size: 30px;
+        font-weight: 600;
+    }
+    label {
+        font-weight: 600;
+    }
+    input {
+        width: 270px;
+        height: 25px;
+        margin-bottom: 20px;
+    }
+    button {
+        width: 270px;
+        height: 30px;
+        background-color: #f0c14b;
+        border-radius: 5px;
+    }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="imgDiv">
+            <img src="https://i2.wp.com/zeevector.com/wp-content/uploads/LOGO/Amazon-India-Logo-PNG-HD.png?resize=600%2C171&ssl=1" >
+        </div>
+
+        <div id="form">
+            <p>Create Account</p>
+            <form>
+                <label for="name">Your Name</label><br>
+                <input type="text" id="name"><br>
+
+                <label for="mobile">Mobile Number</label><br>
+                <input type="number" id="mobile" placeholder="Mobile Number"><br>
+
+                <label for="email">Email</label><br>
+                <input type="email" id="email"><br>
+
+                <label for="password">Password</label><br>
+                <input type="password" id="password" placeholder="At least 6 characters"><br>
+
+                <button>Continue</button>
+            </form>
+            <p>Already have an account</p>
+            <p><a href="login.html">Sign in</a></p>
+        </div>
+
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html>

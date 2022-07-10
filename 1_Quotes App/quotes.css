@@ -1,0 +1,40 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html, body{
+    width: 100%;
+}
+
+nav {
+    background-color: #2f418e;
+    height: 50px;
+}
+
+#navLeft {
+    display: flex;
+    padding: 15px;
+    color: white;
+}
+
+#navLeft > p {
+    margin-left: 20px;
+    font-size: 16px;
+}
+#navLeft > p:nth-child(2){
+    font-size:28px;
+    margin-top: -8px;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+    margin-top: -10px;
+}
+
+#btnDiv{
+    width: 360px;
+    margin: auto;
+    margin-top: 250px;
+}

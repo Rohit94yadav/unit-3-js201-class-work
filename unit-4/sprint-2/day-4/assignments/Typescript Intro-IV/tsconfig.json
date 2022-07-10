@@ -1,0 +1,11 @@
+{
+    "include": ["src"],
+    "exclude": ["node_modules"],
+    "compilerOptions": {
+        "module": "CommonJS",
+        "outDir": "dist",
+        "target": "es2017",
+        "declaration": true,
+        "strict": true
+    }
+}

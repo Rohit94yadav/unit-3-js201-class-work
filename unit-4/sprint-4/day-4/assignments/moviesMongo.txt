@@ -1,0 +1,39 @@
+> show dbs     
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+movies  0.000GB
+
+> use movies
+switched to db movies
+
+> show collections
+movies
+
+> db.movies.find({"movieName" : "Bad Influence"}).pretty()
+
+> db.movies.find({movieName : {$eq: "Bad Influence"}}).pretty()
+
+> db.movies.find({movieName : {$ne: "Bad Influence"}}).pretty()
+
+ db.movies.find({budget: {$gt: 15000}}).pretty()
+db.movies.find({budget: {$gte: 15000}}).pretty()
+
+db.movies.find({budget: {$lt: 15000}}).pretty()
+db.movies.find({budget: {$lte: 15000}}).pretty()
+
+> db.movies.find({$and: [{productionYear: {$gt: 2000}}, {budget: {$gt: 1000}}]}).pretty()
+
+> db.movies.find({$or: [{productionYear: {$gt: 2000}}, {budget: {$gt: 1000}}]}).pretty()
+
+> db.movies.find({$and: [{productionYear: {$lt: 2000}}, {budget: {$lt: 10000}}]}).pretty()
+
+> db.movies.find({$or: [{productionYear: {$lt: 2000}}, {budget: {$lt: 10000}}]}).pretty()
+
+> db.movies.find({$and: [{productionYear: {$gt: 2000}}, {productionYear: {$lt: 2010}}]}).pretty()
+
+> db.movies.find().sort({productionYear: -1, movieName: 1}).pretty()
+
+> db.movies.find().skip(10).limit(5).pretty()
+
+> db.movies.find({}, {"movieGenre" : 0}).pretty()

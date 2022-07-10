@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "flatNo": 124,
+        "street": "3 Kipling Avenue",
+        "landmark": "Merrick",
+        "area": "Granby",
+        "city": "Debrecen",
+        "state": "Hajdú-Bihar",
+        "pinCode": 924733
+    },
+    {
+        "id": 2,
+        "flatNo": 122,
+        "street": "1265 Ilene Point",
+        "landmark": "Carey",
+        "area": "Graedel",
+        "city": "Pescara",
+        "state": "Abruzzi",
+        "pinCode": 697284
+    },
+    {
+        "id": 3,
+        "flatNo": 193,
+        "street": "58 Sherman Parkway",
+        "landmark": "Jana",
+        "area": "Crest Line",
+        "city": "Debrecen",
+        "state": "Hajdú-Bihar",
+        "pinCode": 997388
+    },
+    {
+        "id": 4,
+        "flatNo": 128,
+        "street": "1708 Basil Parkway",
+        "landmark": "Hoffman",
+        "area": "Debra",
+        "city": "Debrecen",
+        "state": "Hajdú-Bihar",
+        "pinCode": 805042
+    },
+    {
+        "id": 5,
+        "flatNo": 126,
+        "street": "54 Kenwood Circle",
+        "landmark": "Warrior",
+        "area": "8th",
+        "city": "Agraharam",
+        "state": "Andhra Pradesh",
+        "pinCode": 298370
+    },
+    {
+        "id": 6,
+        "flatNo": 117,
+        "street": "12577 Larry Hill",
+        "landmark": "Dunning",
+        "area": "Esker",
+        "city": "Debrecen",
+        "state": "Hajdú-Bihar",
+        "pinCode": 844682
+    },
+    {
+        "id": 7,
+        "flatNo": 125,
+        "street": "9 Fisk Junction",
+        "landmark": "Artisan",
+        "area": "Lawn",
+        "city": "Debrecen",
+        "state": "Hajdú-Bihar",
+        "pinCode": 157472
+    },
+    {
+        "id": 8,
+        "flatNo": 192,
+        "street": "718 Fulton Circle",
+        "landmark": "Twin Pines",
+        "area": "Clemons",
+        "city": "Pescara",
+        "state": "Abruzzi",
+        "pinCode": 676091
+    },
+    {
+        "id": 9,
+        "flatNo": 136,
+        "street": "2628 Karstens Plaza",
+        "landmark": "Sloan",
+        "area": "Vidon",
+        "city": "Debrecen",
+        "state": "Hajdú-Bihar",
+        "pinCode": 245114
+    },
+    {
+        "id": 10,
+        "flatNo": 193,
+        "street": "2547 Stoughton Place",
+        "landmark": "Hallows",
+        "area": "Loomis",
+        "city": "Debrecen",
+        "state": "Hajdú-Bihar",
+        "pinCode": 102142
+    },
+    {
+        "id": "11",
+        "flatNo": "dsf",
+        "street": "dsfdsf",
+        "landmark": "dsfdsf",
+        "area": "sdfds",
+        "city": "sdfdsf",
+        "state": "sdfdsf",
+        "pinCode": "123456"
+    },
+    {
+        "id": "12",
+        "flatNo": "dsf",
+        "street": "dsfdsf",
+        "landmark": "dsfdsf",
+        "area": "sdfds",
+        "city": "sdfdsf",
+        "state": "sdfdsf",
+        "pinCode": "123456"
+    }
+]

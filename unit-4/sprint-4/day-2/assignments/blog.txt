@@ -1,0 +1,55 @@
+show DATABASES;
+CREATE DATABASE blogs;
+
+USE blogs;
+
+CREATE TABLE posts (id INT auto_increment PRIMARY KEY, title VARCHAR(50) NOT NULL, content TEXT NOT NULL, createdAt TIME NOT NULL, authorId INT NOT NULL, FOREIGN KEY (authorId) REFERENCES authors(id) ON DELETE CASCADE);
+
+CREATE TABLE authors (id INT auto_increment PRIMARY KEY, FirstName VARCHAR(50) NOT NULL, LastName VARCHAR(50));
+
+CREATE TABLE comments (id INT auto_increment PRIMARY KEY, CommentBody TEXT NOT NULL, postId INT NOT NULL, FOREIGN KEY (postId) REFERENCES posts(id));
+
+CREATE TABLE tags (id INT auto_increment PRIMARY KEY, tags VARCHAR(50) NOT NULL);
+
+CREATE TABLE postTag (postId INT NOT NULL, tagId INT NOT NULL, FOREIGN KEY (postId) REFERENCES posts(id) ON DELETE CASCADE, FOREIGN KEY (tagId) REFERENCES tags(id) ON DELETE CASCADE);
+
+INSERT INTO posts (title, content, createdAt, authorId) values ('MERN Stack', 'For web development', '02:26:55', 1), ('React', 'A JS library for making user interface', '12:06:44', 2), ('React & Redux', 'For making web pages', '22:56:13', 3), ('DOM', 'programming interface for html docs', '14:35:55', 4), ('JavaScript', 'A programming language', '06:06:00', 5);
+
+INSERT INTO authors (firstName, LastName) values ('Kartik', 'Yadav'), ('Dhaval', 'Cheda'), ('Salman', 'Khan'), ('Akshay', 'Kumar'), ('Sushant', 'Singh');
+
+INSERT INTO comments (CommentBody, postId) values ('Nice Article', 1), ('Learned a lot', 2), ('Beneficial', 3), ('Well explained', 1), ('learned al lot', 4), ('nicely explained', 5);
+
+INSERT INTO tags (tags) values ('HTML'), ('CSS'), ('JavaScript'), ('React'), ('Redux');
+
+INSERT INTO postTag (postId, tagId) values (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 1), (2, 2), (2, 4), (3, 4), (3, 5), (4, 1), (4, 3), (5, 3);
+
+DELETE FROM tags WHERE id = 1;
+
+UPDATE authors SET firstName = 'Aamir' WHERE id = 3;
+
+SELECT a.*, p.title, p.content, p.createdAt FROM authors AS a 
+JOIN posts AS p ON a.id = p.authorId WHERE a.id = 1;
+
+SELECT a.*, c.CommentBody FROM posts AS p 
+JOIN comments AS c ON p.id = c.postId
+JOIN authors AS a ON a.id = p.authorId
+WHERE a.id = 1;
+
+SELECT p.*, c.CommentBody FROM posts AS p 
+JOIN comments AS c ON p.id = c.postId WHERE p.id = 1;
+
+SELECT p.*, t.tags FROM postTag AS pt 
+JOIN posts AS p on p.id = pt.postId
+JOIN tags AS t on t.id = pt.tagId
+where p.id = 2;
+
+SELECT p.*, t.tags FROM postTag AS pt 
+JOIN posts AS p on p.id = pt.postId
+JOIN tags AS t on t.id = pt.tagId
+where t.id = 2;
+
+SELECT a.*, t.tags FROM postTag AS pt
+JOIN posts AS p ON p.id = pt.postId
+JOIN authors AS a ON a.id = p.authorId
+JOIN tags AS t ON t.id = pt.tagId
+where a.id = 1;

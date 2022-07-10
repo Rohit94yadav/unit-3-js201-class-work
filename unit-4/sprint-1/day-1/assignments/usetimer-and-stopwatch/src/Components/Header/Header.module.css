@@ -1,0 +1,10 @@
+.container {
+    padding: 20px;
+    outline: 1px solid black;
+    flex: 1;
+}
+
+.active {
+    background: lightblue;
+    color: white;
+}
