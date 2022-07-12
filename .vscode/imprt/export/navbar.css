@@ -1,0 +1,9 @@
+#navbar{
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+    
+    background-color: darkseagreen;
+    padding: 20px;
+    
+}
