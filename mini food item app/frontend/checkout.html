@@ -1,0 +1,109 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        img{
+            width: 170px;
+        }
+        #main{
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            border: 1px solid grey;
+            margin: auto;
+            justify-content: center;
+           
+
+        }
+        #container{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+           
+        }
+        #line{
+            width: 400px;
+            border: 1px solid black;
+        }
+        #container>div{
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>ThankYou For Ordering</h1>
+    <div id="main">
+        <div id="container"> </div>
+        <div id="line"></div>
+        <h3 id="ttl"></h3>
+        <h3>Order Status :-  successfull</h3>
+
+    </div>
+
+</body>
+</html>
+
+<script>
+    let ttl = localStorage.getItem("totalorder");
+
+    let getdata = async () => {
+      let res = await fetch("http://127.0.0.1:3000/api/myorder");
+      let data = await res.json();
+      console.log(data);
+      append(data);
+  };
+
+  getdata();
+
+function append(data) {
+    let container = document.getElementById("container");
+    let total = 0;
+
+    data.forEach((el) => {
+      let div = document.createElement("div");
+
+      let img = document.createElement("img");
+      img.src = el.image;
+
+      let name = document.createElement("h2");
+      name.innerText = el.mealname;
+
+      let price = document.createElement("h2");
+      price.innerText = `Rs ${el.price} `;
+
+
+      
+
+     
+
+
+     
+        
+
+
+
+      div.append(img, name, price);
+      container.append(div);
+
+      
+    });
+   
+    
+    
+    
+
+  }
+
+ 
+  document.getElementById("ttl").innerText = `Total amount to be paid on Delievery:- Rs ${ttl}`;
+    
+</script>

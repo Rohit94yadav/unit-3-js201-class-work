@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+
+        <h1>ADD PRODUCTS</h1>
+        <input type="number" id="id">
+        <input type="text" id="name">
+        <input type="text" id="age">
+        <input type="text" id="address">
+        <button onclick="addproduct()">ADD</button>
+
+    </div>
+    <div>
+        <h1>DELETE PRODUCT</h1>
+        <input type="number" id="did">
+        <button onclick="deleteproduct()">DELETE</button>
+    </div>
+
+    <div>
+        <h1>UPDATE PRODUCT</h1>
+        <input type="number" id="uid">
+        <button onclick="updateproduct()">UPDATE</button>
+    </div>
+</body>
+</html>
+
+<script>
+
+    function getvalue(id){
+
+      return  document.getElementById(id).value
+    }
+
+async function addproduct(){
+
+    let product = {
+
+        id: getvalue("id"),
+        name: getvalue("name"),
+        age: getvalue("age"),
+        address: getvalue("address"),
+    };
+
+    product = JSON.stringify(product);
+
+    let response = await fetch("http://127.0.0.1:3000/api/products" , {
+
+        method: "POST",
+
+        body: product,
+
+        headers:{
+
+            "Content-Type" : "application/json",
+        },
+    });
+
+   console.log(response)
+
+}
+
+async function deleteproduct(){
+
+    let id = document.getElementById("did").value;
+
+    let response = await fetch(`http://127.0.0.1:3000/api/products/${id}`,{
+
+        method: "DELETE",
+
+        headers:{
+
+            "Content-Type" : "application/json",
+
+        },
+
+    });
+
+    let data = await response.json();
+
+}
+
+
+
+async function updateproduct(){
+
+let id = document.getElementById("uid").value;
+
+let response = await fetch(`http://127.0.0.1:3000/api/products/${id}`,{
+
+    method: "PUT",                //(***********PUT replaces whole data while PATCH updates*************** )//
+
+    body: JSON.stringify({
+
+        name: "purohit",
+      age: "23",
+      address: "gurgaon"
+
+    }),
+
+    headers:{
+
+        "Content-Type" : "application/json",
+
+    },
+
+});
+
+let data = await response.json();
+
+}
+
+
+</script>

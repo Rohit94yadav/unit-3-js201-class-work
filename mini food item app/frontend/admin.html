@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta mealname="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        #add{
+            background-color: cadetblue;
+            padding: 30px;
+        }
+        #del{
+            background-color:burlywood;
+            padding: 30px;
+        }
+        #updates1{
+            background-color:coral;
+            padding: 30px;
+        }
+        #container{
+            display: grid;
+            grid-template-columns: repeat(2,40%);
+            grid-template-rows: auto;
+            margin: auto;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+        #container>div{
+            margin-top: 30px;
+           
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        #container>div>img{
+            width: 450px;
+            height: 450px;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="add">
+      <h1>ADD items</h1>
+      <input type="text" id="image" placeholder="image" />
+      <input type="number" id="id" placeholder="id" />
+      <input type="text" id="mealname" placeholder="Meal" />
+      <input type="text" id="price" placeholder="Price" />
+      <input type="text" id="rating" placeholder="Rating" />
+      <button onclick="addproduct(event)">ADD ITEM</button>
+    </div>
+    <div id="del">
+      <h1>DELETE PRODUCT</h1>
+      <input type="number" id="del_id" />
+      <button onclick="deleteproduct()">DELETE</button>
+    </div>
+
+    <div id="updates1">
+      <h1>UPDATE PRODUCT</h1>
+      <input type="number" id="update_id" placeholder="enter ID" />
+      <input type="text" id="updateimage" placeholder="Image URL" />
+      <input type="text" id="updatename" placeholder="NAME" />
+      <input type="text" id="updaterating" placeholder="Rating" />
+      <input type="text" id="updateprice" placeholder="Price" />
+      <button onclick="updateproduct()">UPDATE</button>
+
+    </div>
+    <div id="container"></div>
+  </body>
+</html>
+
+<script>
+  function getvalue(id) {
+    return document.getElementById(id).value;
+  }
+
+  async function addproduct(e) {
+    e.preventDefault();
+    let product = {
+      image: getvalue("image"),
+      id: getvalue("id"),
+      mealname: getvalue("mealname"),
+      price: +getvalue("price"),
+      rating: +getvalue("rating"),
+    };
+
+    product = JSON.stringify(product);
+
+    fetch("http://127.0.0.1:3000/api/items", {
+      method: "POST",
+
+      body: product,
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  async function deleteproduct() {
+    let id = document.getElementById("del_id").value;
+
+    let response = await fetch(`http://127.0.0.1:3000/api/items/${id}`, {
+      method: "DELETE",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    let data = await response.json();
+  }
+
+  async function updateproduct() {
+    let product = {
+      image: getvalue("updateimage"),
+      id: getvalue("update_id"),
+      mealname: getvalue("updatename"),
+      price: +getvalue("updateprice"),
+      rating: +getvalue("updaterating"),
+    };
+
+    product = JSON.stringify(product);
+    let id = document.getElementById("update_id").value;
+
+    fetch(`http://127.0.0.1:3000/api/items/${id}`, {
+      method: "PATCH", //(***********PUT replaces whole data while PATCH updates*************** )//
+
+      body: product,
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  let getdata = async () => {
+    let res = await fetch("http://127.0.0.1:3000/api/items");
+    let data = await res.json();
+    console.log(data);
+    append(data);
+  };
+
+  getdata();
+
+  function append(data) {
+    let container = document.getElementById("container");
+
+    data.forEach((el) => {
+      let div = document.createElement("div");
+
+      let img = document.createElement("img");
+      img.src = el.image;
+
+      let name = document.createElement("h2");
+      name.innerText = el.mealname;
+
+      let price = document.createElement("h2");
+      price.innerText = el.price;
+
+      let rating = document.createElement("h3");
+      rating.innerText = el.rating;
+
+      let id = document.createElement("h3");
+      id.innerText = `id:-${el.id}`;
+
+      let button = document.createElement("button");
+      button.innerText = "Order Now >>";
+      button.addEventListener("click", function () {
+        savedata(el);
+      });
+
+      div.append(img, name, price, rating, id, button);
+      container.append(div);
+    });
+  }
+</script>

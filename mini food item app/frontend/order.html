@@ -1,0 +1,127 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      #container{
+            display: grid;
+            grid-template-columns: repeat(2,40%);
+            grid-template-rows: auto;
+            margin: auto;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+        #container>div{
+            margin-top: 30px;
+           
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        #container>div>img{
+            width: 450px;
+            height: 450px;
+        }
+        #check{
+          display: flex;
+          justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="display"></div>
+    <div
+    id="container"></div>
+    <div id="check">
+
+      <button ><a href="./checkout.html">Checkout</a></button>
+    </div>
+</body>
+</html>
+
+<script>
+
+
+
+
+let getdata = async () => {
+      let res = await fetch("http://127.0.0.1:3000/api/myorder");
+      let data = await res.json();
+      console.log(data);
+      append(data);
+  };
+
+  getdata();
+
+function append(data) {
+    let container = document.getElementById("container");
+    let total = 0;
+
+    data.forEach((el) => {
+      let div = document.createElement("div");
+
+      let img = document.createElement("img");
+      img.src = el.image;
+
+      let name = document.createElement("h2");
+      name.innerText = el.mealname;
+
+      let price = document.createElement("h2");
+      price.innerText = el.price;
+
+      let rating = document.createElement("h3");
+      rating.innerText = el.rating;
+
+      
+
+      let button = document.createElement("button")
+      button.innerText="Remove"
+      button.addEventListener("click",function(){
+        removeitem(el.id);
+      })
+
+
+     
+        
+
+
+
+      div.append(img, name, price, rating, button);
+      container.append(div);
+
+      total+= eval(el.price);
+      document.getElementById("display").innerText= `Total :- ${total}`;
+    });
+   
+    
+    localStorage.setItem("totalorder",total);
+    
+
+  }
+
+ async function removeitem(id){
+
+   
+
+    let response = await fetch(`http://127.0.0.1:3000/api/myorder/${id}`,{
+
+    method: "DELETE",
+
+    headers:{
+
+        "Content-Type" : "application/json",
+
+    },
+
+});
+
+let data = await response.json();
+  }
+
+
+</script>

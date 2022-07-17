@@ -1,0 +1,136 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+     body{
+            background-color: coral;
+        }
+        h1{
+            text-align: center;
+            color: rgb(117, 34, 34);
+        }
+        #container{
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            justify-content: center;
+            align-items: center;
+           text-align: center;
+        }
+        #container>div>form{
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            justify-content: center;
+           
+            width: 400px;
+            gap: 20px;
+        }
+</style>
+<body>
+    <h1>Flipkart inventory system</h1>
+    <div id="container">
+        
+
+        <h1>Login</h1>
+        <div id="loginfrom">
+            <form>
+                <input type="text" id="loginusername" placeholder="Username">
+                <input type="text" id="loginpassword" placeholder="Password">
+            </form>
+            <button onclick="login(event)">Login</button>
+        </div>
+
+    </div>
+</body>
+</html>
+
+<script>
+
+   
+
+
+ function login(e){
+
+    e.preventDefault();
+let username =  document.getElementById("loginusername").value
+    let logindata = {
+        
+        username : document.getElementById("loginusername").value,
+            password : document.getElementById("loginpassword").value,
+        }
+    
+
+
+    logindata = JSON.stringify(logindata);  
+
+    let login_api_link = 'https://masai-api-mocker.herokuapp.com/auth/login';
+
+    fetch(login_api_link,
+        {
+
+            method: "POST",
+
+            body: logindata, 
+
+            headers: 
+            {
+                "Content-Type" : "application/json"
+            },
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            if(response.error === false){
+
+                alert("successfull")
+            }
+            console.log(response)
+            getprofile(response, username)
+        })
+        .catch((err) => {
+            
+            alert("Invalid Credentials")
+            console.log(err.message)
+        })
+
+
+    }
+
+    function getprofile({ token },  username ){
+        console.log(username, token)
+        fetch(`https://masai-api-mocker.herokuapp.com/user/${username}`,{
+
+        headers: {
+            Authorization : `Bearer ${token}`,
+        },
+    })
+    .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            
+            console.log(response)
+            if(response.description === "admin"){
+            window.location.href = "./admin.html"
+         }else{
+            window.location.href = "./menu.html"
+         }
+        })
+        .catch((err) => {
+            
+          
+            console.log(err.message)
+        });
+
+    }
+    
+
+       
+
+</script>
